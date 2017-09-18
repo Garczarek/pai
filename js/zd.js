@@ -2,9 +2,9 @@
 
 
 function funkcja(form) {
-var h = form.h.value;
-var r = form.r.value;
-var l = form.l.value;
+var h = parseFloat(form.h.value);
+var r = parseFloat(form.r.value);
+var l = Math.sqrt(Math.pow(h,2)+Math.pow(r,2));
 if (document.getElementById("obwod").checked) {
     var obw;
     obw = 2*Math.PI*r;
@@ -13,13 +13,13 @@ if (document.getElementById("obwod").checked) {
 } else {
     if (document.getElementById("pole").checked) {
     var pole;
-    pole = Math.PI*r*(r+l);
+    pole = Math.PI * r * (r+l);
     pole = Math.round(pole);
     document.getElementById("wynik").innerHTML = "Pole= " + pole;
 } else {
     if (document.getElementById("objetosc").checked) {
     var ob;
-    ob = 1/3*Math.PI*r*r*h;
+    ob = (1/3)*Math.PI*r*r*h;
     ob = Math.round(ob);
     document.getElementById("wynik").innerHTML = "Objętość= " + ob;
 }
