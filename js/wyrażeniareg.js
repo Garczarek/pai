@@ -37,3 +37,8 @@ kod.oninput = function() {
         blok.style.color = "red";
     }
 }
+
+var regEx = /\w+\.mp3/g; // g - wyszukiwanie globalne, czyli przeszukanie calego ciągu
+var pliki ='plik.mp3 arkusz.csv szkola.mp3 zsk.mp3';
+var sprawdz1 = pliki.match(regEx);
+console.log(sprawdz1);
