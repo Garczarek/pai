@@ -14,34 +14,54 @@ var blok = document.getElementById("blok");
 
 blok.style.color = "red";
 
-//window.onload = function() {
-//    alert("Witaj");
-//}
+var regImie = /^[A-z]{2,16}$/;
+var regNazw = /^[A-z]{2,30}(\-[A-z]{2,30})?$/;
+var regLog = /^(\w|\W){4,25}$/;
+var regMail = /^[A-z](\w|\W){0,15}@(\w{2,10}\.){1,3}[a-z]{2,4}$/;
+var regHas = /^((?=.*\d)(?=.*[A-z])(?=.*[\W|_]).{8,20})$/;
 
-//imie.onblur = sprawdz();
-
-
-/*
-function sprawdz() {
-    if(imie.value.length >= 2 && this.value.length < 15) {
-        blok.textContent = "";
-        //imie.setAttribute("disabled", "");
-    } else {
-        blok.textContent = "Błędne dane";
-    }
-}
-*/
-
-function sprawdz() {
-    var element = document.getElementById(this.id);
-    if(element.value.length >= 2 && element.value.length < 15) {
+function sprawdzImie() {
+    if(regImie.test(imie.value)) {
         blok.textContent = "";
         this.disabled = true;
     } else {
-        element.focus();
-        blok.textContent = "Błędne dane";
+        imie.focus();
+        blok.textContent = "Wpisz poprawnie imie";
     }
 }
+
+function sprawdzNazw() {
+    if(regNazw.test(nazwisko.value)) {
+        blok.textContent = "";
+        this.disabled = true;
+    } else {
+        nazwisko.focus();
+        blok.textContent = "Wpisz poprawnie nazwisko";
+    }
+}
+
+function sprawdzLog() {
+    if(regLog.test(login.value)) {
+        blok.textContent = "";
+        this.disabled = true;
+    } else {
+        login.focus();
+        blok.textContent = "Wpisz poprawnie login";
+    }
+}
+
+function blokuj() {
+    if(regMail.test(mail1.value)) {
+        blok.textContent = "";
+        this.disabled = true;
+        mail2.disabled = false;
+        mail2.focus();
+    } else {
+        mail1.focus();
+        blok.textContent = "Wpisz poprawnie maila";
+    }
+}
+
 
 
 function mail() {
@@ -57,6 +77,19 @@ function mail() {
         this.disabled = true;
     }
 }
+
+function blokuj2() {
+    if(regHas.test(pass1.value)) {
+        blok.textContent = "";
+        this.disabled = true;
+        pass2.disabled = false;
+        pass2.focus();
+    } else {
+        pass1.focus();
+        blok.textContent = "Wpisz bezpieczne hasło";
+    }
+}
+
 function pass() {
     if( pass1.value != pass2.value ) {
         blok.textContent = "Wpisałeś różne hasła";
@@ -71,19 +104,6 @@ function pass() {
     }
 }
 
-function blokuj() {
-    this.disabled = true;
-    blok.textContent = "";
-    mail2.disabled = false;
-    mail2.focus();
-}
-
-function blokuj2() {
-    this.disabled = true;
-    blok.textContent = "";
-    pass2.disabled = false;
-    pass2.focus();
-}
 
 function sprawdzReg() {
     if(regulamin.checked) {
@@ -130,9 +150,9 @@ function wyswielt(){
 }
 
 
-imie.addEventListener("blur", sprawdz);
-nazwisko.addEventListener("blur", sprawdz);
-login.addEventListener("blur", sprawdz);
+imie.addEventListener("blur", sprawdzImie);
+nazwisko.addEventListener("blur", sprawdzNazw);
+login.addEventListener("blur", sprawdzLog);
 mail1.addEventListener("blur", blokuj);
 mail2.addEventListener("blur", mail);
 pass1.addEventListener("blur", blokuj2);
@@ -140,3 +160,5 @@ pass2.addEventListener("blur", pass);
 regulamin.addEventListener("change", sprawdzReg);
 popraw.addEventListener("click", odblokuj);
 przycisk.addEventListener("click", wyswielt);
+
+// Z.D użytkownik podaje z klawiatury nazwy zdjęć z rozszerzeniami, nazwy nie mogą mieć cyfr, mogą być pisane tylko małymi literami oraz nie mogą mieć znaków specjalnych oprócz kropki. Rozdziela nazwy spacjami. Wszystko zdjęcia z rozszerzerniem jpg zapisz w tablicy o nazwie jpg
